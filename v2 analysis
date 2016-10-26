@@ -1,0 +1,91 @@
+import java.io.*;
+import java.util.*;
+
+public class Analysis {
+
+		public static void main(String[]args) throws FileNotFoundException {
+			int word_count = 0;
+			int sentences = 0;
+			String entire = "";
+			Scanner speech = new Scanner(new File("trumpimmigration.txt"));
+			String word = speech.next();
+			while(speech.hasNext()) {
+				word = speech.next();
+				String wordspace = word+" ";
+				word_count++; 
+				entire+=wordspace;
+
+				}
+			for (int i = 0; i< entire.length(); i++) {
+				if (entire.charAt(i)=='.'||entire.charAt(i)=='!'|| entire.charAt(i)=='?'){
+					sentences++;  }
+			//insert next part here, finding the most used words 
+
+			}
+			double average = word_count/sentences;
+
+			if (average  >= 28) {
+				System.out.println("This speech is more dense than Darwin's Origin of Species.");
+			}
+			else if(average>=20 && average <28) {
+				System.out.println("This speech is easier to read than Origin of Species and more difficult than the average Bloomberg news article.");
+			}
+			
+			else if(average>=18 && average <20) {
+				System.out.println("This speech is somewhere between Great Expecations and the average Bloomberg article in terms of denseness." );
+			}
+			else if (average >=15 && average <18) {
+				System.out.println("This speech is easier to read than Great Expectations but harder than an English fairy tale."); 
+			}
+			else if (average >=11 && average <15 ) {
+				System.out.println("This speech is easier to read than an English fairy tale but harder than Harry Potter and the Chamber of Secrets. " );
+			}
+			else {
+				System.out.println("This speech is more simple than Harry Potter");
+			}
+
+			System.out.println(" ");
+			System.out.println("This document contains "+word_count+" words and "+sentences+" sentences.");
+			System.out.println("On average, there's "+average+" words per sentence.");
+			System.out.println(" ");
+	
+			//here is my hash map! 
+			//norepeat is now an arraylist that i'll count frequencies of. 
+			ArrayList<String> norepeat = new ArrayList<String>();
+			
+			Scanner commonWords = new Scanner(new File("top1000.txt"));
+			Map<String,Boolean> wordCountMap = new TreeMap<String,Boolean>();
+			
+			//looping through to see if the speech contains certain common words
+			while (commonWords.hasNext()) {
+				String commonLine = commonWords.nextLine(); 
+				wordCountMap.put(commonLine,true); 
+				
+			}
+			
+			//System.out.println("size of map: " + wordCountMap.size());
+			
+			Scanner newSpeech = new Scanner(new File("trumpimmigration.txt"));
+			//add all 1000 in has map 
+			while (newSpeech.hasNext()) {
+				word = newSpeech.next(); 
+				if (!wordCountMap.containsKey(word)) {
+					norepeat.add(word+" ");
+				}
+				
+			}
+			System.out.println(norepeat);
+			
+			
+			}
+			
+			
+			//parse through each word in the array norepeat
+			
+					
+				
+
+			}
+		
+	
+
